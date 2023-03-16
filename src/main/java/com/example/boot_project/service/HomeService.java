@@ -20,7 +20,6 @@ public class HomeService {
     private final CustomerDao customerDao;
 
 
-
     //    public HomeService() {
 //        try {
 //            init();
@@ -34,7 +33,7 @@ public class HomeService {
         this.customerDao = customerDao;
     }
 
-    private Connection getNewConnection()throws SQLException {
+    private Connection getNewConnection() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=qwerty";
         return DriverManager.getConnection(url);
     }
@@ -47,12 +46,12 @@ public class HomeService {
             } else {
                 throw new SQLException();
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             return e.getMessage();
         }
     }
 
-    private DataSource getDataSource(){
+    private DataSource getDataSource() {
         HikariConfig config = new HikariConfig();
         config.setUsername("postgres");
         config.setPassword("qwerty");
@@ -62,25 +61,26 @@ public class HomeService {
 
 
     private void init() throws SQLException {
-            conn = getNewConnection();
+        conn = getNewConnection();
     }
-    public String connect(){
-        try{
+
+    public String connect() {
+        try {
             init();
             return "Good connection";
-        }catch (SQLException e){
+        } catch (SQLException e) {
             return e.getMessage();
         }
     }
 
-    private int executeUpdate(String query)throws SQLException{
-            init();
+    private int executeUpdate(String query) throws SQLException {
+        init();
         Statement statement = conn.createStatement();
         int result = statement.executeUpdate(query);
         return result;
     }
 
-    private void createCustomerTable()throws SQLException{
+    private void createCustomerTable() throws SQLException {
         String customerTableQuery = "create table customers (" +
                 "id integer primary key," +
                 "name varchar(40)," +
@@ -92,23 +92,23 @@ public class HomeService {
         executeUpdate(customerEntryQuery);
     }
 
-    public String shouldCreateTable(){
-        try{
+    public String shouldCreateTable() {
+        try {
             createCustomerTable();
             conn.createStatement().execute("select * from customers");
             return "All is ok";
-        }catch (SQLException e){
+        } catch (SQLException e) {
             return e.getMessage();
         }
     }
 
-    public String shouldSelectData(){
-        try{
+    public String shouldSelectData() {
+        try {
             String query = "Select * from customers where name = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, "Brian");
 
-            if(ps.execute()){
+            if (ps.execute()) {
 //                return "All is OK";
 
                 ResultSet resultSet = ps.getResultSet();
@@ -116,16 +116,59 @@ public class HomeService {
                 int age = resultSet.getInt("age");
 
                 return String.format("Age %s", age);
-            }else {
+            } else {
                 throw new SQLException();
             }
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    public List<Customer> getCustomers() {
+        return customerDao.getCustomers();
+    }
+
+
+    private void createUsersTable() throws SQLException {
+        String userTableQuery = "create table users (" +
+                "id integer primary key," +
+                "name varchar(40)," +
+                "age integer)";
+        String userEntryQuery = "insert into users(id, name, age)" +
+                "values(1, 'Andrei', 33)";
+
+        executeUpdate(userTableQuery);
+        executeUpdate(userEntryQuery);
+    }
+    public String shouldCreateUserTable(){
+        try{
+            createUsersTable();
+            conn.createStatement().execute("select * from users");
+            return "All is ok";
         }catch (SQLException e){
             return e.getMessage();
         }
     }
 
-    public List<Customer> getCustomers(){
-        return customerDao.getCustomers();
+    private void createPublicationsTable() throws SQLException {
+        String createTablequery = "create table publications (" +
+                "id INTEGER PRIMARY KEY, " +
+                "image TEXT, " +
+                "description TEXT, " +
+                "dataOfPublication timestamp)";
+        executeUpdate(createTablequery);
     }
+
+    public String shouldCreatePublicationsTable(){
+        try{
+            createPublicationsTable();
+            conn.createStatement().execute("select * from users");
+            return "All is ok";
+        }catch (SQLException e){
+            return e.getMessage();
+        }
+    }
+
+
 
 }
