@@ -159,16 +159,43 @@ public class HomeService {
         executeUpdate(createTablequery);
     }
 
-    public String shouldCreatePublicationsTable(){
+    private void createLikesTable() throws SQLException {
+        String createTablequery = "create table likes (" +
+                "id INTEGER PRIMARY KEY, " +
+                "likeHolder INTEGER, " +
+                "likeAim INTEGER, " +
+                "dateOfLike timestamp)";
+        executeUpdate(createTablequery);
+    }
+
+    private void createSubscribesTable() throws SQLException {
+        String createTablequery = "create table subscribes (" +
+                "id INTEGER PRIMARY KEY, " +
+                "subscriberId INTEGER, " +
+                "subscriberTo INTEGER, " +
+                "dateSubscribe timestamp)";
+        executeUpdate(createTablequery);
+    }
+    private void createCommentsTable() throws SQLException {
+        String createTablequery = "create table comments (" +
+                "id INTEGER PRIMARY KEY, " +
+                "commentText varchar(40), " +
+                "dateComment timestamp, " +
+                "user INTEGER)";
+        executeUpdate(createTablequery);
+    }
+
+    public String shouldCreatePublicationsCommentsLikesSubscribesTables(){
         try{
+            createSubscribesTable();
+            createLikesTable();
             createPublicationsTable();
+            createCommentsTable();
             conn.createStatement().execute("select * from users");
             return "All is ok";
         }catch (SQLException e){
             return e.getMessage();
         }
     }
-
-
 
 }

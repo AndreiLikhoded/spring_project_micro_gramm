@@ -32,11 +32,15 @@ public class HomeController {
         return new ResponseEntity<>(service.shouldCreateUserTable(), HttpStatus.OK);
     }
 
-    @PostMapping("/createPublicationsTable")
-    public ResponseEntity<String> createPublicationsTable(){
-        return new ResponseEntity<>(service.shouldCreatePublicationsTable(), HttpStatus.OK);
+    @PostMapping("/createOtherUserTables")
+    public ResponseEntity<String> createOtherUserTables(){
+        return new ResponseEntity<>(service.shouldCreatePublicationsCommentsLikesSubscribesTables(), HttpStatus.OK);
     }
 
+    @GetMapping("/findByName")
+    public ResponseEntity<String> findByName(){
+        return new ResponseEntity<>(service.shouldSelectData(), HttpStatus.OK);
+    }
 
 
     @GetMapping("/select")
