@@ -3,6 +3,7 @@ package com.example.boot_project.service;
 
 import com.example.boot_project.dao.CustomerDao;
 import com.example.boot_project.entity.Customer;
+import com.example.boot_project.entity.User;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,6 @@ public class HomeService {
 
     @Autowired
     private final CustomerDao customerDao;
-
-
-    //    public HomeService() {
-//        try {
-//            init();
-//        }catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
 
 
     public HomeService(CustomerDao customerDao) {
@@ -107,10 +99,7 @@ public class HomeService {
             String query = "Select * from customers where name = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, "Brian");
-
             if (ps.execute()) {
-//                return "All is OK";
-
                 ResultSet resultSet = ps.getResultSet();
                 resultSet.next();
                 int age = resultSet.getInt("age");
@@ -198,4 +187,75 @@ public class HomeService {
         }
     }
 
+    public User findUserByProfile() {
+        String profile = null;
+        try {
+            String SQL = "select * from users " + "where login =?";
+            PreparedStatement statement = conn.prepareStatement(SQL);
+            statement.setString(1, profile);
+
+            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                resultSet.next();
+
+                User user = new User();
+
+                user.setLogin(resultSet.getString("login"));
+
+                return user;
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public User findUserByName() {
+        String profile = null;
+        try {
+            String SQL = "select * from users " + "where name =?";
+            PreparedStatement statement = conn.prepareStatement(SQL);
+            statement.setString(1, profile);
+
+            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                resultSet.next();
+
+                User user = new User();
+
+                user.setName(resultSet.getString("name"));
+
+                return user;
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public User findUserByEmail() {
+        String profile = null;
+        try {
+            String SQL = "select * from users " + "where email =?";
+            PreparedStatement statement = conn.prepareStatement(SQL);
+            statement.setString(1, profile);
+
+            if (statement.execute()) {
+                ResultSet resultSet = statement.getResultSet();
+                resultSet.next();
+
+                User user = new User();
+
+                user.setEmail(resultSet.getString("email"));
+
+                return user;
+            } else {
+                throw new SQLException();
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 public class User {
 
     private Publication publication;
+
+    private String name;
     private String login;
     private String email;
     private int id;
@@ -16,7 +18,10 @@ public class User {
     private int numberOfSubscribes;
     private int numberOfSubscribers;
 
-    public User(String login, String email, int id, int age, String password, int numberOfPublications, int numberOfSubscribes, int numberOfSubscribers) {
+    public User(){}
+
+    public User(String name, String login, String email, int id, int age, String password, int numberOfPublications, int numberOfSubscribes, int numberOfSubscribers) {
+        this.name = name;
         this.login = login;
         this.email = email;
         this.id = id;
