@@ -1,8 +1,5 @@
 package com.example.boot_project.service;
 
-
-import com.example.boot_project.dao.CustomerDao;
-import com.example.boot_project.entity.Customer;
 import com.example.boot_project.entity.User;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -17,14 +14,14 @@ import java.util.List;
 public class HomeService {
     private Connection conn;
 
-    @Autowired
-    private final CustomerDao customerDao;
-
-
-    public HomeService(CustomerDao customerDao) {
-        this.customerDao = customerDao;
-    }
-
+//    @Autowired
+//    private final CustomerDao customerDao;
+//
+//
+//    public HomeService(CustomerDao customerDao) {
+//        this.customerDao = customerDao;
+//    }
+//
     private Connection getNewConnection() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/postgres?user=postgres&password=qwerty";
         return DriverManager.getConnection(url);
@@ -113,9 +110,9 @@ public class HomeService {
         }
     }
 
-    public List<Customer> getCustomers() {
-        return customerDao.getCustomers();
-    }
+//    public List<Customer> getCustomers() {
+//        return customerDao.getCustomers();
+//    }
 
 
     private void createUsersTable() throws SQLException {

@@ -50,5 +50,21 @@ public class UserDao extends BaseDao{
         ));
     }
 
+    @Override
+    public void createTable() {
+        jdbcTemplate.execute("create table if not exists usr\n" +
+                "(\n" +
+                "    id       bigserial primary key,\n" +
+                "    name     varchar,\n" +
+                "    age      integer,\n" +
+                "    login    varchar,\n" +
+                "    email    varchar,\n" +
+                ");");
+    }
+
+    public void deleteAll() {
+        String sql = "delete from usr";
+        jdbcTemplate.update(sql);
+    }
 
 }
