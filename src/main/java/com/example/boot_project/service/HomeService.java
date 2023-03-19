@@ -3,7 +3,6 @@ package com.example.boot_project.service;
 import com.example.boot_project.entity.User;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
@@ -62,7 +61,7 @@ public class HomeService {
         }
     }
 
-    private int executeUpdate(String query) throws SQLException {
+    public int executeUpdate(String query) throws SQLException {
         init();
         Statement statement = conn.createStatement();
         int result = statement.executeUpdate(query);
@@ -184,8 +183,7 @@ public class HomeService {
         }
     }
 
-    public User findUserByProfile() {
-        String profile = null;
+    public User findUserByProfile(String profile) {
         try {
             String SQL = "select * from users " + "where login =?";
             PreparedStatement statement = conn.prepareStatement(SQL);

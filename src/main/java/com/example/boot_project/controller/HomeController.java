@@ -1,17 +1,13 @@
 package com.example.boot_project.controller;
 
 import com.example.boot_project.dao.UserDao;
-import com.example.boot_project.entity.Customer;
 import com.example.boot_project.entity.User;
 import com.example.boot_project.service.HomeService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,26 +23,17 @@ public class HomeController {
         return new ResponseEntity<>(service.connect(), HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<String> create(){
-        return new ResponseEntity<>(service.shouldCreateTable(), HttpStatus.OK);
-    }
 
-    @PostMapping("/createUserTable")
-    public ResponseEntity<String> createUserTable(){
-        return new ResponseEntity<>(service.shouldCreateUserTable(), HttpStatus.OK);
-    }
-
-    @PostMapping("/createOtherUserTables")
-    public ResponseEntity<String> createOtherUserTables(){
+    @PostMapping("/createCommentTable")
+    public ResponseEntity<String> createCommentTable(){
         return new ResponseEntity<>(service.shouldCreatePublicationsCommentsLikesSubscribesTables(), HttpStatus.OK);
     }
 
-    @GetMapping("/findByLogin")
-    public ResponseEntity<User> findByLogin(){
-        return new ResponseEntity<>(service.findUserByProfile(), HttpStatus.OK);
-    }
-
+//    @GetMapping("/findByLogin")
+//    public ResponseEntity<User> findByLogin(@PathVariable String profileId){
+//        return new ResponseEntity<>(service.findUserByProfile(profileId), HttpStatus.OK);
+//    }
+//
     @GetMapping("/findByName")
     public ResponseEntity<User> findByName(){
         return new ResponseEntity<>(service.findUserByName(), HttpStatus.OK);
@@ -66,10 +53,5 @@ public class HomeController {
     @GetMapping("/hikari")
     public ResponseEntity<String> hikari(){
         return new ResponseEntity<>(service.getDataSourceConn(), HttpStatus.OK);
-    }
-
-    @GetMapping("/customers")
-    public ResponseEntity<List<Customer>> getCustomers(){
-        return new ResponseEntity<>(service.getCustomers(), HttpStatus.OK);
     }
 }
