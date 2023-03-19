@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 
 public class DataBaseManipulation {
     @Bean
-    CommandLineRunner init(UserDao userDao, CommentDao commentDao, LikeDao likeDao, PublicationDao publicationDao, SubscriberDao subscriberDao) {
+    CommandLineRunner run(UserDao userDao, CommentDao commentDao, LikeDao likeDao, PublicationDao publicationDao, SubscriberDao subscriberDao) {
         return (args) -> {
             userDao.createTable();
             commentDao.createTable();

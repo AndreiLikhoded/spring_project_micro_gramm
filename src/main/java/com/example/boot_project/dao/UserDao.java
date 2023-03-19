@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -56,6 +57,11 @@ public class UserDao extends BaseDao{
                 "    email    varchar,\n" +
                 ");");
     }
+    public List<User> findAll() {
+        String sql = "select * from usr";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+    }
+
 
     public void deleteAll() {
         String sql = "delete from usr";
