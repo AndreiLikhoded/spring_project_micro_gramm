@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.List;
 
 @Service
 public class HomeService {
@@ -61,33 +60,11 @@ public class HomeService {
         }
     }
 
-    public int executeUpdate(String query) throws SQLException {
+    private int executeUpdate(String query) throws SQLException {
         init();
         Statement statement = conn.createStatement();
         int result = statement.executeUpdate(query);
         return result;
-    }
-
-    private void createCustomerTable() throws SQLException {
-        String customerTableQuery = "create table customers (" +
-                "id integer primary key," +
-                "name varchar(40)," +
-                "age integer)";
-        String customerEntryQuery = "insert into customers(id, name, age)" +
-                "values(73, 'Brian', 33)";
-
-        executeUpdate(customerTableQuery);
-        executeUpdate(customerEntryQuery);
-    }
-
-    public String shouldCreateTable() {
-        try {
-            createCustomerTable();
-            conn.createStatement().execute("select * from customers");
-            return "All is ok";
-        } catch (SQLException e) {
-            return e.getMessage();
-        }
     }
 
     public String shouldSelectData() {
@@ -183,7 +160,8 @@ public class HomeService {
         }
     }
 
-    public User findUserByProfile(String profile) {
+    public User findUserByProfile() {
+        String profile = null;
         try {
             String SQL = "select * from users " + "where login =?";
             PreparedStatement statement = conn.prepareStatement(SQL);
