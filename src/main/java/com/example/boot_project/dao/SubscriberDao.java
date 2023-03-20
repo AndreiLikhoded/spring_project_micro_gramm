@@ -5,6 +5,7 @@ import com.example.boot_project.entity.Subscriber;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,20 @@ public class SubscriberDao extends BaseDao{
                 jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Subscriber.class), subscriberId)
         ));
     }
+    public void update(Subscriber subscriber) {
+        String sql = "update subscribe " +
+                "set user_id = :user_id, " +
+                "userSubscribeTo = :userSubscribeTo, " +
+                "userSubscriberId = :userSubscriberId, " +
+                "dateSubscribe = :dateSubscribe " +
+                "where id = :id";
+        namedParameterJdbcTemplate.update(sql,
+                new MapSqlParameterSource("userSubscriberTo", subscriber.getSubscriberTo())
+                        .addValue("userSubscriberId", subscriber.getUserSubscriberId())
+                        .addValue("dateSubscribe", subscriber.getDateSubscribe()));
+
+    }
+
 
     public void deleteAll() {
         String sql = "delete from subscribers";

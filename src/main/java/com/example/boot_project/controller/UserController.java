@@ -1,11 +1,13 @@
 package com.example.boot_project.controller;
 
+import com.example.boot_project.dto.PublicationDTO;
+import com.example.boot_project.dto.SubscribeDTO;
 import com.example.boot_project.dto.UserDTO;
+import com.example.boot_project.service.PublicationService;
+import com.example.boot_project.service.SubscriberService;
 import com.example.boot_project.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,9 +16,13 @@ import java.util.List;
 
 public class UserController {
     private final UserService userService;
+    private final PublicationService publicationService;
+    private final SubscriberService subscriberService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PublicationService publicationService, SubscriberService subscriberService) {
         this.userService = userService;
+        this.publicationService = publicationService;
+        this.subscriberService = subscriberService;
     }
 
     @GetMapping
@@ -39,5 +45,13 @@ public class UserController {
         return userService.findEmail(userEmail);
     }
 
+    @GetMapping("/{userId}/publications")
+    public List<PublicationDTO> findPublications(@PathVariable Long userId) {
+        return publicationService.findPublications(userId);
+    }
+    @GetMapping("/{userId}/subscriber")
+    public List<SubscribeDTO>findSubcribers(@PathVariable Long subscriberId){
+    return subscriberService.findSubscribers(subscriberId);
 
+    }
 }

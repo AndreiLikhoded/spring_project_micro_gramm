@@ -5,6 +5,7 @@ import com.example.boot_project.entity.Publication;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -56,6 +57,33 @@ public class PublicationDao extends BaseDao{
                 jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Publication.class), publicationId)
         ));
     }
+
+    public void update(Publication publication) {
+        String sql = "update publications " +
+                "set user_id = :user_id, " +
+                "comment = :comment, " +
+                "image = :image, " +
+                "description = :description " +
+                "dateOfPublication = :dateOfPublication " +
+                "user_id = :user_id " +
+                "where id = :id";
+        namedParameterJdbcTemplate.update(sql,
+                new MapSqlParameterSource("user_id", publication.getUserId())
+                        .addValue("comment", publication.getComment())
+                        .addValue("image", publication.getImage())
+                        .addValue("description", publication.getDescription())
+                        .addValue("dateOfPublication", publication.getDateOfPublication())
+                        .addValue("user_id", publication.getUserId())
+                        .addValue("id", publication.getId()));
+    }
+
+    public void deleteById(Long publicationId) {
+        String sql = "delete from publications " +
+                "where id = ?";
+        jdbcTemplate.update(sql);
+    }
+
+
 
     public void deleteAll() {
         String sql = "delete from publications";

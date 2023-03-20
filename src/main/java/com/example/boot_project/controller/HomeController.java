@@ -17,45 +17,45 @@ public class HomeController {
     private final HomeService service;
     private final UserDao userDao;
 
-    @GetMapping("/connect")
-    public ResponseEntity<String> connection(){
-        return new ResponseEntity<>(service.connect(), HttpStatus.OK);
-    }
+//    @GetMapping("/connect")
+//    public ResponseEntity<String> connection(){
+//        return new ResponseEntity<>(service.connect(), HttpStatus.OK);
+//    }
 
-    @PostMapping("/createUserTable")
-    public ResponseEntity<String> createUserTable(){
-        return new ResponseEntity<>(service.shouldCreateUserTable(), HttpStatus.OK);
-    }
-
-    @PostMapping("/createOtherUserTables")
-    public ResponseEntity<String> createOtherUserTables(){
-        return new ResponseEntity<>(service.shouldCreatePublicationsCommentsLikesSubscribesTables(), HttpStatus.OK);
-    }
-
-    @GetMapping("/findByLogin")
-    public ResponseEntity<User> findByLogin(){
-        return new ResponseEntity<>(service.findUserByProfile(), HttpStatus.OK);
-    }
-
-    @GetMapping("/findByName")
-    public ResponseEntity<User> findByName(){
-        return new ResponseEntity<>(service.findUserByName(), HttpStatus.OK);
-    }
-
-    @GetMapping("/findByEmail")
-    public ResponseEntity<User> findByEmail(){
-        return new ResponseEntity<>(service.findUserByEmail(), HttpStatus.OK);
-    }
-
-
-    @GetMapping("/select")
-    public ResponseEntity<String> select(){
-        return new ResponseEntity<>(service.shouldSelectData(), HttpStatus.OK);
-    }
-
-    @GetMapping("/hikari")
-    public ResponseEntity<String> hikari(){
-        return new ResponseEntity<>(service.getDataSourceConn(), HttpStatus.OK);
-    }
+//    @PostMapping("/createUserTable")
+//    public ResponseEntity<String> createUserTable(){
+//        return new ResponseEntity<>(service.shouldCreateUserTable(), HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/createOtherUserTables")
+//    public ResponseEntity<String> createOtherUserTables(){
+//        return new ResponseEntity<>(service.shouldCreatePublicationsCommentsLikesSubscribesTables(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/findByLogin")
+//    public ResponseEntity<User> findByLogin(){
+//        return new ResponseEntity<>(service.findUserByProfile(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/findByName")
+//    public ResponseEntity<User> findByName(){
+//        return new ResponseEntity<>(service.findUserByName(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/findByEmail")
+//    public ResponseEntity<User> findByEmail(){
+//        return new ResponseEntity<>(service.findUserByEmail(), HttpStatus.OK);
+//    }
+//
+//
+//    @GetMapping("/select")
+//    public ResponseEntity<String> select(){
+//        return new ResponseEntity<>(service.shouldSelectData(), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/hikari")
+//    public ResponseEntity<String> hikari(){
+//        return new ResponseEntity<>(service.getDataSourceConn(), HttpStatus.OK);
+//    }
 
 }

@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Publication {
     private Long id;
+    private Long userId;
     private Comment comment;
     private String image;
     private String description;
