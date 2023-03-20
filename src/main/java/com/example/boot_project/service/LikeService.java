@@ -14,12 +14,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class LikeService {
-    private final PublicationDao publicationDao;
     private final UserDao userDao;
     private final LikeDao likeDao;
 
     public LikeService(PublicationDao publicationDao, UserDao userDao, LikeDao likeDao) {
-        this.publicationDao = publicationDao;
         this.userDao = userDao;
         this.likeDao = likeDao;
     }

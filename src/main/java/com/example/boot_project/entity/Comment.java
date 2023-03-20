@@ -19,7 +19,8 @@ public class Comment {
     private String commentText;
     private LocalDateTime dateComment;
 
-    private Set<User> user;
+    private Set<User> userId;
+    private Publication commentToPublication;
 
 //    public Comment(String commentText, LocalDateTime dateComment) {
 //        this.commentText = commentText;
