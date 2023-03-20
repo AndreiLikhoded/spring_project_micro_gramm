@@ -49,6 +49,7 @@ public class UserController {
     public List<PublicationDTO> findPublications(@PathVariable Long userId) {
         return publicationService.findPublications(userId);
     }
+
     @GetMapping("/{userId}/subscriber")
     public List<SubscribeDTO>findSubcribers(@PathVariable Long subscriberId){
     return subscriberService.findSubscribers(subscriberId);

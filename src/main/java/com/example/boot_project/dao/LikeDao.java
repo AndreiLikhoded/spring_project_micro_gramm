@@ -1,9 +1,11 @@
 package com.example.boot_project.dao;
 
 import com.example.boot_project.entity.Like;
+import com.example.boot_project.entity.Publication;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,6 @@ public class LikeDao extends BaseDao{
                 "(\n" +
                 "    id       bigserial primary key,\n" +
                 "    likeAim     varchar,\n" +
-                "    age         integer,\n" +
                 "    dateOfLike  timestamp,\n" +
                 ");");
     }
@@ -33,6 +34,19 @@ public class LikeDao extends BaseDao{
         String sql = "select * from likes";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Like.class));
     }
+    public void update(Like like) {
+        String sql = "update likes " +
+                "set publication_id = :publication_id, " +
+                "likeAim = :likeAim, " +
+                "dateOfLike = :dateOfLike, " +
+                "where id = :id";
+        namedParameterJdbcTemplate.update(sql,
+                new MapSqlParameterSource("publication_id", like.getUserId())
+                        .addValue("likeAim", like.getLikeAim())
+                        .addValue("dateOfLIke", like.getDateOfLike())
+                        .addValue("id", like.getId()));
+    }
+
 
     public Optional<Like> findById(Long likeId) {
         String sql = "select * " +
@@ -43,10 +57,15 @@ public class LikeDao extends BaseDao{
         ));
     }
 
+    public void deleteById(Long likeId) {
+        String sql = "delete from likes " +
+                "where id = ?";
+        jdbcTemplate.update(sql);
+    }
+
     public void deleteAll() {
         String sql = "delete from likes";
         jdbcTemplate.update(sql);
     }
-
 
 }
