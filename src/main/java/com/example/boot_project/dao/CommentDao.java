@@ -26,7 +26,7 @@ public class CommentDao extends BaseDao{
                 "    id       bigserial primary key,\n" +
                 "    commentText     varchar,\n" +
                 "    dateComment     timestamp,\n" +
-                "    commentToPublication     varchar,\n" +
+                "    commentToPublication     varchar\n" +
                 ");");
     }
 
@@ -55,7 +55,6 @@ public class CommentDao extends BaseDao{
                 new MapSqlParameterSource("user_id", comment.getUserId())
                         .addValue("commentText", comment.getCommentText())
                         .addValue("dateComment", comment.getDateComment())
-                        .addValue("commentToPublication", comment.getCommentToPublication())
                         .addValue("id", comment.getId()));
     }
 

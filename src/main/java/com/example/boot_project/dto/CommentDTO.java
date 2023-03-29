@@ -21,16 +21,13 @@ public class CommentDTO {
                 .commentText(comment.getCommentText())
                 .dateComment(comment.getDateComment())
                 .userId(comment.getUserId())
-                .commentToPublication(comment.getCommentToPublication())
                 .build();
     }
 
     private Long id;
     private String commentText;
     private LocalDateTime dateComment;
-
-    private Set<User> userId;
-    private Publication commentToPublication;
+    private Long userId;
 
 
 }

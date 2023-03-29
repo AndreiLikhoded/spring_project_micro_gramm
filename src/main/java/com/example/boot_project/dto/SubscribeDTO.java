@@ -25,8 +25,8 @@ public class SubscribeDTO {
                 .build();
     }
     private Long id;
-    private Set<User> userSubscriberId;
-    private Set<User> subscriberTo;
+    private User userSubscriberId;
+    private User subscriberTo;
     private LocalDateTime dateSubscribe;
 
 }

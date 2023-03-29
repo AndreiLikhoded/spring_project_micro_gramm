@@ -6,24 +6,40 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
 
-    private Publication publication;
+@Entity
+@Table(name = "usr")
+public class User implements UserDetails {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(unique = true)
     private String name;
+    private String password;
+
     private String login;
     private String email;
-    private int id;
     private int age;
-    private String password;
+    private int publicationId;
     private int numberOfPublications;
     private int numberOfSubscribes;
     private int numberOfSubscribers;
+    private Boolean enabled = Boolean.TRUE;
 
 
     public static User random() {
@@ -33,18 +49,39 @@ public class User {
                 .build();
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("FULL"));
 
-//    public User(String name, String login, String email, int id, int age, String password, int numberOfPublications, int numberOfSubscribes, int numberOfSubscribers) {
-//        this.name = name;
-//        this.login = login;
-//        this.email = email;
-//        this.id = id;
-//        this.age = age;
-//        this.password = password;
-//        this.numberOfPublications = numberOfPublications;
-//        this.numberOfSubscribes = numberOfSubscribes;
-//        this.numberOfSubscribers = numberOfSubscribers;
-//    }
-//
+    }
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

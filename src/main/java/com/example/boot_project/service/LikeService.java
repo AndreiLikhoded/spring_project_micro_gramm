@@ -27,7 +27,6 @@ public class LikeService {
         var like = Like.builder()
                 .id(likeData.getId())
                 .userId(likeData.getUserId())
-                .likeAim(likeData.getLikeAim())
                 .dateOfLike(likeData.getDateOfLike())
                 .build();
         likeDao.update(like);

@@ -16,15 +16,9 @@ import java.util.Set;
 public class Like {
 
     private Long id;
-    private Set<User> userId;
-    private Publication likeAim;
+    private Long userId;
+    private Long publicationId;
     private LocalDateTime dateOfLike;
-
-//    public Like(Set<User> userId, Publication likeAim, LocalDateTime dateOfLike) {
-//        this.userId = userId;
-//        this.likeAim = likeAim;
-//        this.dateOfLike = dateOfLike;
-//    }
 }
 
 

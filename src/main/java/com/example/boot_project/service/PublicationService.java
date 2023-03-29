@@ -23,7 +23,6 @@ public class PublicationService {
         var publication = Publication.builder()
                 .id(publicationData.getId())
                 .userId(publicationData.getUserId())
-                .comment(publicationData.getComment())
                 .image(publicationData.getImage())
                 .description(publicationData.getDescription())
                 .dateOfPublication(publicationData.getDateOfPublication())

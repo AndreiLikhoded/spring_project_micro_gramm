@@ -16,7 +16,7 @@ public class UserDTO {
 
     public static UserDTO from(User user){
         return builder()
-                .publication(user.getPublication())
+                .publicationId(user.getPublicationId())
                 .name(user.getName())
                 .login(user.getLogin())
                 .email(user.getEmail())
@@ -27,15 +27,13 @@ public class UserDTO {
                 .build();
     }
 
-    private Publication publication;
     private String name;
     private String login;
     private String email;
     private int age;
+    private int publicationId;
     private int numberOfPublications;
     private int numberOfSubscribes;
     private int numberOfSubscribers;
-
-
 
 }

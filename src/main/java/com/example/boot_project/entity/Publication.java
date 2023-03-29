@@ -14,14 +14,7 @@ import java.time.LocalDateTime;
 public class Publication {
     private Long id;
     private Long userId;
-    private Comment comment;
     private String image;
     private String description;
     private LocalDateTime dateOfPublication;
-
-//    public Publication(String image, String description, LocalDateTime dataOfPublication) {
-//        this.image = image;
-//        this.description = description;
-//        this.dataOfPublication = dataOfPublication;
-//    }
 }

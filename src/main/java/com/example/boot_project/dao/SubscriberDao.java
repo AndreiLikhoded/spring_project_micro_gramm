@@ -8,8 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-
-import java.sql.PreparedStatement;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +21,10 @@ public class SubscriberDao extends BaseDao{
 
     @Override
     public void createTable() {
-        jdbcTemplate.execute("create table if not exists subcribers\n" +
+        jdbcTemplate.execute("create table if not exists subscribers\n" +
                 "(\n" +
                 "    id bigserial          primary key,\n" +
-                "    dateSubscriber        varchar,\n" +
+                "    dateSubscriber        varchar\n" +
                 ");");
     }
 
@@ -55,7 +53,6 @@ public class SubscriberDao extends BaseDao{
                         .addValue("dateSubscribe", subscriber.getDateSubscribe()));
 
     }
-
 
     public void deleteAll() {
         String sql = "delete from subscribers";

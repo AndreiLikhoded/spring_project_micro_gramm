@@ -19,11 +19,7 @@ public class Comment {
     private String commentText;
     private LocalDateTime dateComment;
 
-    private Set<User> userId;
-    private Publication commentToPublication;
+    private Long userId;
+    private Long publicationId;
 
-//    public Comment(String commentText, LocalDateTime dateComment) {
-//        this.commentText = commentText;
-//        this.dateComment = dateComment;
-//    }
 }

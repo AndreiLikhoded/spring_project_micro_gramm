@@ -26,7 +26,7 @@ public class LikeDao extends BaseDao{
                 "(\n" +
                 "    id       bigserial primary key,\n" +
                 "    likeAim     varchar,\n" +
-                "    dateOfLike  timestamp,\n" +
+                "    dateOfLike  timestamp\n" +
                 ");");
     }
 
@@ -42,7 +42,6 @@ public class LikeDao extends BaseDao{
                 "where id = :id";
         namedParameterJdbcTemplate.update(sql,
                 new MapSqlParameterSource("publication_id", like.getUserId())
-                        .addValue("likeAim", like.getLikeAim())
                         .addValue("dateOfLIke", like.getDateOfLike())
                         .addValue("id", like.getId()));
     }

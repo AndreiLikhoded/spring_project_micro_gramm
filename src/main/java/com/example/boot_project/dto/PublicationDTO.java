@@ -19,7 +19,6 @@ public class PublicationDTO {
         return builder()
                 .id(publication.getId())
                 .userId(publication.getUserId())
-                .comment(publication.getComment())
                 .image(publication.getImage())
                 .description(publication.getDescription())
                 .dateOfPublication(publication.getDateOfPublication())
@@ -28,7 +27,6 @@ public class PublicationDTO {
 
     private Long id;
     private Long userId;
-    private Comment comment;
     private String image;
     private String description;
     private LocalDateTime dateOfPublication;

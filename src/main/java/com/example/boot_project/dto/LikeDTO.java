@@ -18,14 +18,14 @@ public class LikeDTO {
         return builder()
                 .id(like.getId())
                 .userId(like.getUserId())
-                .likeAim(like.getLikeAim())
+                .publicationId(like.getPublicationId())
                 .dateOfLike(like.getDateOfLike())
                 .build();
     }
 
     private Long id;
-    private Set<User> userId;
-    private Publication likeAim;
+    private Long userId;
+    private Long publicationId;
     private LocalDateTime dateOfLike;
 
 }

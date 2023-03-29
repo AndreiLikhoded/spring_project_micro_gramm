@@ -24,8 +24,6 @@ public class CommentService {
                 .id(commentDTO.getId())
                 .commentText(commentDTO.getCommentText())
                 .dateComment(commentDTO.getDateComment())
-                .userId(commentDTO.getUserId())
-                .commentToPublication(commentDTO.getCommentToPublication())
                 .build();
         commentDao.update(comment);
 

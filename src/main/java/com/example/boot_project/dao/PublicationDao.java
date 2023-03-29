@@ -26,10 +26,9 @@ public class PublicationDao extends BaseDao{
         jdbcTemplate.execute("create table if not exists publications\n" +
                 "(\n" +
                 "    id       bigserial primary key,\n" +
-                "    comment               varchar,\n" +
                 "    image                 varchar,\n" +
                 "    description           varchar,\n" +
-                "    dateOfPublication     timestamp,\n" +
+                "    dateOfPublication     timestamp\n" +
                 ");");
     }
 
@@ -40,7 +39,7 @@ public class PublicationDao extends BaseDao{
 
     public void savePublications(Publication publication) {
         String sql = "insert into publications(image, description) " +
-                "values(?,?,?,?)";
+                "values(?,?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, publication.getImage());
@@ -61,7 +60,6 @@ public class PublicationDao extends BaseDao{
     public void update(Publication publication) {
         String sql = "update publications " +
                 "set user_id = :user_id, " +
-                "comment = :comment, " +
                 "image = :image, " +
                 "description = :description " +
                 "dateOfPublication = :dateOfPublication " +
@@ -69,7 +67,6 @@ public class PublicationDao extends BaseDao{
                 "where id = :id";
         namedParameterJdbcTemplate.update(sql,
                 new MapSqlParameterSource("user_id", publication.getUserId())
-                        .addValue("comment", publication.getComment())
                         .addValue("image", publication.getImage())
                         .addValue("description", publication.getDescription())
                         .addValue("dateOfPublication", publication.getDateOfPublication())
